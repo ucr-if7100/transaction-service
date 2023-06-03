@@ -1,47 +1,45 @@
 package ucr.gasIn.transactionservice.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ucr.gasIn.transactionservice.domain.Category;
-import ucr.gasIn.transactionservice.service.CategoryService;
+import ucr.gasIn.transactionservice.domain.Transaction;
+import ucr.gasIn.transactionservice.service.TransactionService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(path = "/api/Category")
-public class CategoryController {
-
+@RequestMapping(path = "/api/Transaction")
+public class TransactionController {
     @Autowired
-    private CategoryService service;
-
+    private TransactionService service;
     @GetMapping("/get")
-    public List<Category> list() {
+    public List<Transaction> list() {
         return service.listAll();
     }
 
-    @GetMapping("/getCategory/{id}")
-    public ResponseEntity<Category> get(@PathVariable Integer id) {
+    @GetMapping("/getId/{id}")
+    public ResponseEntity<Transaction> get(@PathVariable Integer id) {
         try {
-            Category category = service.get(id);
-            return new ResponseEntity<Category>(category, HttpStatus.OK);
+            Transaction transaction = service.get(id);
+            return new ResponseEntity<Transaction>(transaction, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<Category>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Transaction>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/insert")
-    public void add(@RequestBody Category category) {service.save(category);
+    public void add(@RequestBody Transaction transaction) {service.save(transaction);
     }
 
     @RequestMapping(path = "/update/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable("id") int id,
-                       @RequestBody Category category) {
-        Category entity = category;
+                       @RequestBody Transaction transaction) {
+        Transaction entity = transaction;
         entity.setId(id);
         service.update(entity);
     }
