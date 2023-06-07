@@ -14,19 +14,19 @@ public class Transaction {
     private String description;
     private char type; //gasto o ingreso
     private float amount;
-    private String fecha;
+    private String date;
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Category.class)
     @JoinColumn(name = "category_id",nullable = true)
     private Category idCategory;
 
-    public Transaction(int id, int idUser, String numRefBank, String description, char type, float amount,String fecha, Category idCategory, int idAccount) {
+    public Transaction(int id, int idUser, String numRefBank, String description, char type, float amount,String date, Category idCategory, int idAccount) {
         this.setId(id);
         this.setIdUser(idUser);
         this.setNumRefBank(numRefBank);
         this.setDescription(description);
         this.setType(type);
         this.setAmount(amount);
-        this.setFecha(fecha);
+        this.setDate(date);
         this.setIdCategory(idCategory);
         this.setIdAccount(idAccount);
     }
@@ -81,11 +81,11 @@ public class Transaction {
     public void setAmount(float amount) {
         this.amount = amount;
     }
-    public String getFecha() {
-        return fecha;
+    public String getDate() {
+        return date;
     }
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDate(String Date) {
+        this.date = date;
     }
 
     public Category getIdCategory() {
