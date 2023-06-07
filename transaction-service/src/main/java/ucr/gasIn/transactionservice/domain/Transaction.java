@@ -2,6 +2,7 @@ package ucr.gasIn.transactionservice.domain;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class Transaction {
     @Id
@@ -13,17 +14,19 @@ public class Transaction {
     private String description;
     private char type; //gasto o ingreso
     private float amount;
+    private String fecha;
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Category.class)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id",nullable = true)
     private Category idCategory;
 
-    public Transaction(int id, int idUser, String numRefBank, String description, char type, float amount, Category idCategory, int idAccount) {
+    public Transaction(int id, int idUser, String numRefBank, String description, char type, float amount,String fecha, Category idCategory, int idAccount) {
         this.setId(id);
         this.setIdUser(idUser);
         this.setNumRefBank(numRefBank);
         this.setDescription(description);
         this.setType(type);
         this.setAmount(amount);
+        this.setFecha(fecha);
         this.setIdCategory(idCategory);
         this.setIdAccount(idAccount);
     }
@@ -77,6 +80,12 @@ public class Transaction {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+    public String getFecha() {
+        return fecha;
+    }
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public Category getIdCategory() {
