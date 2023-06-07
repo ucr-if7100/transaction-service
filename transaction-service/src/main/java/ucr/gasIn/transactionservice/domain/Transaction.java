@@ -9,17 +9,15 @@ public class Transaction {
     private int id;
     private int idUser;
     private String numRefBank; //numero de referencia bancaria
+    private int idAccount;
     private String description;
-    private char type;
+    private char type; //gasto o ingreso
     private float amount;
     @ManyToOne(cascade = CascadeType.ALL, targetEntity = Category.class)
     @JoinColumn(name = "category_id")
     private Category idCategory;
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = Account.class)
-    @JoinColumn(name = "account_id")
-    private Account idAccount;
 
-    public Transaction(int id, int idUser, String numRefBank, String description, char type, float amount, Category idCategory, Account idAccount) {
+    public Transaction(int id, int idUser, String numRefBank, String description, char type, float amount, Category idCategory, int idAccount) {
         this.setId(id);
         this.setIdUser(idUser);
         this.setNumRefBank(numRefBank);
@@ -89,11 +87,11 @@ public class Transaction {
         this.idCategory = idCategory;
     }
 
-    public Account getIdAccount() {
+    public int getIdAccount() {
         return idAccount;
     }
 
-    public void setIdAccount(Account idAccount) {
+    public void setIdAccount(int idAccount) {
         this.idAccount = idAccount;
     }
 }
