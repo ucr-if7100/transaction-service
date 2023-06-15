@@ -44,7 +44,7 @@ public class TransactionService {
 
     private TransactionDTO convertEntityToDto(Transaction transaction){
         TransactionDTO transactionDTO = new TransactionDTO();
-        //transactionDTO.setIdAccount(transaction.getIdAccount());
+        transactionDTO.setIdAccount(transaction.getIdAccount());
         transactionDTO.setIdUser(transaction.getIdUser());
         transactionDTO.setDate(transaction.getDate());
         transactionDTO.setNumRefBank(transaction.getNumRefBank());
@@ -58,7 +58,7 @@ public class TransactionService {
 
     private Transaction convertDtoToEntity(TransactionDTO transactionDTO){
         Transaction transaction = new Transaction();
-        //transaction.setIdAccount(transactionDTO.getIdAccount());
+        transaction.setIdAccount(transactionDTO.getIdAccount());
         transaction.setIdUser(transactionDTO.getIdUser());
         transaction.setDate(transactionDTO.getDate());
         transaction.setNumRefBank(transactionDTO.getNumRefBank());

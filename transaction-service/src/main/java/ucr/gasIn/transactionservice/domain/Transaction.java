@@ -29,7 +29,7 @@ public class Transaction {
         this.setId(id);
         this.idUser = idUser;
         this.numRefBank = numRefBank;
-        this.idAccount = idAccount;
+        this.setIdAccount(idAccount);
         this.description = description;
         this.setType(type);
         this.amount = amount;
@@ -73,14 +73,6 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public int getIdAccount() {
-        return idAccount;
-    }
-
-    public void setIdAccount(int idAccount) {
-        this.idAccount = idAccount;
-    }
-
     public UUID getId() {
         return id;
     }
@@ -104,12 +96,19 @@ public class Transaction {
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
     }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getIdAccount() {
+        return idAccount;
+    }
+
+    public void setIdAccount(int idAccount) {
+        this.idAccount = idAccount;
     }
 }
