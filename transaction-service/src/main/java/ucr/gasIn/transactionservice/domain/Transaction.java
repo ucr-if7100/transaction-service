@@ -2,6 +2,7 @@ package ucr.gasIn.transactionservice.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 import java.util.UUID;
@@ -10,9 +11,13 @@ import java.util.UUID;
 @Entity
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
+    @Column(name = "id_user")
     private int idUser;
+    @Column(name = "num_ref_bank")
     private String numRefBank; //numero de referencia bancaria
     @Column(name = "id_account")
     private int idAccount;
@@ -23,23 +28,31 @@ public class Transaction {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
+    @Column(name = "id_category")
     private int idCategory;
 
     public Transaction(UUID id, int idUser, String numRefBank, int idAccount, String description, TransactionType type, float amount, Date date, int idCategory) {
         this.setId(id);
-        this.idUser = idUser;
-        this.numRefBank = numRefBank;
+        this.setIdUser(idUser);
+        this.setNumRefBank(numRefBank);
         this.setIdAccount(idAccount);
-        this.description = description;
+        this.setDescription(description);
         this.setType(type);
-        this.amount = amount;
+        this.setAmount(amount);
         this.setDate(date);
         this.setIdCategory(idCategory);
     }
 
-    public Transaction() {
+    public Transaction(){    }
+
+
+    public UUID getId() {
+        return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public int getIdUser() {
         return idUser;
@@ -57,28 +70,20 @@ public class Transaction {
         this.numRefBank = numRefBank;
     }
 
+    public int getIdAccount() {
+        return idAccount;
+    }
+
+    public void setIdAccount(int idAccount) {
+        this.idAccount = idAccount;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public TransactionType getType() {
@@ -89,13 +94,14 @@ public class Transaction {
         this.type = type;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public float getAmount() {
+        return amount;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
+
     public Date getDate() {
         return date;
     }
@@ -104,11 +110,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public int getIdAccount() {
-        return idAccount;
+    public int getIdCategory() {
+        return idCategory;
     }
 
-    public void setIdAccount(int idAccount) {
-        this.idAccount = idAccount;
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 }

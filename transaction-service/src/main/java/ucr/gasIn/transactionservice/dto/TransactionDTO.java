@@ -40,10 +40,6 @@ public class TransactionDTO {
         this.numRefBank = numRefBank;
     }
 
-    public int getIdAccount() {
-        return idAccount;
-    }
-
     public void setIdAccount(int idAccount) {
         this.idAccount = idAccount;
     }
@@ -86,5 +82,8 @@ public class TransactionDTO {
 
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
+    }
+    public int getIdAccount() {
+        return idAccount;
     }
 }

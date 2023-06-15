@@ -44,12 +44,12 @@ public class TransactionService {
 
     private TransactionDTO convertEntityToDto(Transaction transaction){
         TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setId(transaction.getId());
         transactionDTO.setIdAccount(transaction.getIdAccount());
         transactionDTO.setIdUser(transaction.getIdUser());
         transactionDTO.setDate(transaction.getDate());
         transactionDTO.setNumRefBank(transaction.getNumRefBank());
         transactionDTO.setType(transaction.getType());
-        transactionDTO.setId(transaction.getId());
         transactionDTO.setDescription(transaction.getDescription());
         transactionDTO.setIdCategory(transaction.getIdCategory());
         transactionDTO.setAmount(transaction.getAmount());
@@ -58,15 +58,15 @@ public class TransactionService {
 
     private Transaction convertDtoToEntity(TransactionDTO transactionDTO){
         Transaction transaction = new Transaction();
-        transaction.setIdAccount(transactionDTO.getIdAccount());
+        transaction.setId(transactionDTO.getId());
         transaction.setIdUser(transactionDTO.getIdUser());
         transaction.setDate(transactionDTO.getDate());
         transaction.setNumRefBank(transactionDTO.getNumRefBank());
         transaction.setType(transactionDTO.getType());
-        transaction.setId(transactionDTO.getId());
         transaction.setDescription(transactionDTO.getDescription());
         transaction.setIdCategory(transactionDTO.getIdCategory());
         transaction.setAmount(transactionDTO.getAmount());
+        transaction.setIdAccount(transactionDTO.getIdAccount());
         return transaction;
     }
 }
