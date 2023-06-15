@@ -10,13 +10,13 @@ public class Category {
     private int id;
     private String name;
     private String description;
-    private int idUser;
+    private int id_user;
 
     public Category(int id, String name, String description, int idUser) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.idUser = idUser;
+        this.id_user = idUser;
     }
     public Category(){}
 
@@ -44,11 +44,11 @@ public class Category {
         this.description = description;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getId_user() {
+        return id_user;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 }

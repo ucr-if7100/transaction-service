@@ -19,5 +19,5 @@ databaseChangeLog:
                   name: description
                   type: varchar(255)
               - column:
-                  name: idUser
+                  name: id_user
                   type: int
