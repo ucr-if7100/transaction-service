@@ -25,29 +25,33 @@ public class TransactionController {
     }
 
     @GetMapping("/getId/{id}")
-    public ResponseEntity<TransactionDTO> get(@PathVariable UUID id) {
+    public ResponseEntity<TransactionDTO> get(@PathVariable("id") String id) {
         try {
-            TransactionDTO transaction = service.get(id);
+            UUID idTransaction = UUID.fromString(id);
+            TransactionDTO transaction = service.get(idTransaction);
             return new ResponseEntity<TransactionDTO>(transaction, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<TransactionDTO>(HttpStatus.NOT_FOUND);
         }
     }
 
+
     @PostMapping("/insert")
     public void add(@RequestBody TransactionDTO transactionDTO) {service.save(transactionDTO);
     }
 
     @RequestMapping(path = "/update/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable("id") UUID id,
+    public void update(@PathVariable("id") String id,
                        @RequestBody TransactionDTO transactionDTO) {
         TransactionDTO entity = transactionDTO;
-        entity.setId(id);
+        UUID idTransaction = UUID.fromString(id);
+        entity.setId(idTransaction);
         service.update(entity);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable UUID id) {
-        service.delete(id);
+    public void delete(@PathVariable("id") String id) {
+        UUID idTransaction = UUID.fromString(id);
+        service.delete(idTransaction);
     }
 }
