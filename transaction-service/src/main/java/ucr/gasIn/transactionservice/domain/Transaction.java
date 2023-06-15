@@ -14,6 +14,7 @@ public class Transaction {
     private UUID id;
     private int idUser;
     private String numRefBank; //numero de referencia bancaria
+    @Column(name = "id_account")
     private int idAccount;
     private String description;
     @Enumerated(EnumType.STRING)
