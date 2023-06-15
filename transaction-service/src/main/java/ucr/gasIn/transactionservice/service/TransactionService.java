@@ -4,33 +4,69 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ucr.gasIn.transactionservice.domain.Transaction;
+import ucr.gasIn.transactionservice.dto.TransactionDTO;
 import ucr.gasIn.transactionservice.repository.TransactionRepository;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class TransactionService {
     @Autowired
     private TransactionRepository repository;
 
-    public List<Transaction> listAll() {
-        return repository.findAll();
+    public List<TransactionDTO> listAll() {
+        return repository.findAll().stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
     }
 
-    public void save(Transaction transaction) {
+    public void save(TransactionDTO transactionDTO) {
+        Transaction transaction = convertDtoToEntity(transactionDTO);
         repository.save(transaction);
     }
 
-    public Transaction get(int idTransaction) {
-        return repository.findById(idTransaction).get();
+    public TransactionDTO get(UUID idTransaction) {
+        return repository.findById(idTransaction).map(this::convertEntityToDto).orElse(null);
     }
 
-    public void update(Transaction transaction) {
+    public void update(TransactionDTO transactionDTO) {
+        Transaction transaction = convertDtoToEntity(transactionDTO);
         Transaction entityToUpdate = repository.findById(transaction.getId()).get();
         if(entityToUpdate != null) {
             repository.save(transaction);
         }
     }
-    public void delete(int id) {repository.deleteById(id);
+    public void delete(UUID id) {repository.deleteById(id);
+    }
+
+    private TransactionDTO convertEntityToDto(Transaction transaction){
+        TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setIdAccount(transaction.getIdAccount());
+        transactionDTO.setIdUser(transaction.getIdUser());
+        transactionDTO.setDate(transaction.getDate());
+        transactionDTO.setNumRefBank(transaction.getNumRefBank());
+        transactionDTO.setType(transaction.getType());
+        transactionDTO.setId(transaction.getId());
+        transactionDTO.setDescription(transaction.getDescription());
+        transactionDTO.setIdCategory(transaction.getIdCategory());
+        transactionDTO.setAmount(transaction.getAmount());
+        return transactionDTO;
+    }
+
+    private Transaction convertDtoToEntity(TransactionDTO transactionDTO){
+        Transaction transaction = new Transaction();
+        transaction.setIdAccount(transactionDTO.getIdAccount());
+        transaction.setIdUser(transactionDTO.getIdUser());
+        transaction.setDate(transactionDTO.getDate());
+        transaction.setNumRefBank(transactionDTO.getNumRefBank());
+        transaction.setType(transactionDTO.getType());
+        transaction.setId(transactionDTO.getId());
+        transaction.setDescription(transactionDTO.getDescription());
+        transaction.setIdCategory(transactionDTO.getIdCategory());
+        transaction.setAmount(transactionDTO.getAmount());
+        return transaction;
     }
 }

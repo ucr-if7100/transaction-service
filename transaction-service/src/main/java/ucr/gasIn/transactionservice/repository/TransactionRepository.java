@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import ucr.gasIn.transactionservice.domain.Category;
 import ucr.gasIn.transactionservice.domain.Transaction;
 
+import java.util.UUID;
+
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
+public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
 }
