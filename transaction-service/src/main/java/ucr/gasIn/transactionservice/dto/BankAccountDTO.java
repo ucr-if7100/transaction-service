@@ -8,6 +8,12 @@ public class BankAccountDTO {
     private int accountNumber;
     private String accountName;
     private String bankName;
+    private BankAccountType bankAccountType;
+    private Float currentBalance;
+    private String card;
+    private String iban;
+    private String phoneNumber;
+    private int id_user;
 
     public int getAccountNumber() {
         return accountNumber;
@@ -80,13 +86,6 @@ public class BankAccountDTO {
     public void setId_user(int id_user) {
         this.id_user = id_user;
     }
-
-    private BankAccountType bankAccountType;
-    private Float currentBalance;
-    private String card;
-    private String iban;
-    private String phoneNumber;
-    private int id_user;
 
     private BankAccountDTO(){
     }
