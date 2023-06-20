@@ -1,0 +1,54 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: create_BankAccount_Table
+      author: Anthony
+      changes:
+        - createTable:
+            tableName: Bank_Account
+            columns:
+              - column:
+                  name: Account_number
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: Account_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Bank_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Bank_account_type
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Current_balance
+                  type: float
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Card
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: IBAN
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Phone_number
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_user
+                  type: int
+                  constraints:
+                    nullable: false
