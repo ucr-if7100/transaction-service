@@ -31,5 +31,9 @@ public class BankAccountController {
     public List<BankAccountDTO> getUserBankAccounts(@PathVariable int userId){
         return converter.getUserResponse(bankAccountService.find_by_user_id(userId));
     }
-
+    @PostMapping(path = "/update")
+    public void updateBankAccount
+            (@RequestBody BankAccountDTO bankAccount) {
+         bankAccountService.update(converter.postRequest(bankAccount));
+    }
 }
