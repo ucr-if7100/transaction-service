@@ -129,19 +129,6 @@ public class BankAccountDTO {
             return this;
         }
 
-        public builder postRequest(){
-            this.accountName=bankAccount.getAccountName();
-            this.accountNumber=bankAccount.getAccountNumber();
-            this.bankName=bankAccount.getBankName();
-            this.bankAccountType=bankAccount.getBankAccountType();
-            this.currentBalance=bankAccount.getCurrentBalance();
-            this.card=bankAccount.getCard();
-            this.iban=bankAccount.getIban();
-            this.phoneNumber= bankAccount.getPhoneNumber();
-            this.id_user=bankAccount.getId_user();
-            return this;
-        }
-
         public BankAccountDTO build(){
             BankAccountDTO bankAccountDTO = new BankAccountDTO();
             bankAccountDTO.setAccountName(accountName);
