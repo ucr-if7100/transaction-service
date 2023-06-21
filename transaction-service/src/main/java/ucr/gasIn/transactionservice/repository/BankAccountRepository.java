@@ -8,9 +8,10 @@ import ucr.gasIn.transactionservice.domain.BankAccount;
 import ucr.gasIn.transactionservice.domain.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount, Integer> {
     @Query("SELECT b FROM BankAccount b WHERE b.id_user = :userId")
-    List<BankAccount> findAllByUserId(@Param("userId") int userId);
+    Optional<List<BankAccount>> findAllByUserId(@Param("userId") int userId);
 }

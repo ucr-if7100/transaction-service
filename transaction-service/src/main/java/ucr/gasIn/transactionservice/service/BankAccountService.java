@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ucr.gasIn.transactionservice.domain.BankAccount;
 import ucr.gasIn.transactionservice.repository.BankAccountRepository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,11 +26,11 @@ public class BankAccountService {
         return repository.save(bankAccount) != null;
     }
 
-    public BankAccount find_by_id(int accountNumber) {
-        return repository.findById(accountNumber).get();
+    public Optional<BankAccount> find_by_id(int accountNumber) {
+        return repository.findById(accountNumber);
     }
 
-    public List<BankAccount> find_by_user_id(int userId) {
+    public Optional<List<BankAccount>> find_by_user_id(int userId) {
         return repository.findAllByUserId(userId);
     }
 

@@ -6,6 +6,7 @@ import ucr.gasIn.transactionservice.dto.BankAccountDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BankAccountRestConverter {
@@ -26,18 +27,25 @@ public class BankAccountRestConverter {
 
     }
 
-    public BankAccountDTO getAccountNumberResponse(BankAccount bankAccount){
-        return new BankAccountDTO.builder(bankAccount).getAccountNumberResponse().build();
+    public BankAccountDTO getAccountNumberResponse(Optional<BankAccount> bankAccount){
+        if (bankAccount.isPresent())
+            return new BankAccountDTO.builder(bankAccount.get()).getAccountNumberResponse().build();
+        else
+            return null;
 
     }
 
-    public List<BankAccountDTO> getUserResponse(List<BankAccount> bankAccounts){
+    public List<BankAccountDTO> getUserResponse(Optional<List<BankAccount>> bankAccounts){
         List<BankAccountDTO> bankAccountsDTO = new ArrayList<BankAccountDTO>();
-        for (BankAccount bankAccount:bankAccounts) {
-            BankAccountDTO bankAccountDTO = new BankAccountDTO.builder(bankAccount).getUserIdResponse().build();
-            bankAccountsDTO.add(bankAccountDTO);
+        if(bankAccounts.isPresent()) {
+            for (BankAccount bankAccount : bankAccounts.get()) {
+                BankAccountDTO bankAccountDTO = new BankAccountDTO.builder(bankAccount).getUserIdResponse().build();
+                bankAccountsDTO.add(bankAccountDTO);
+            }
+            return bankAccountsDTO;
+        }else{
+            return bankAccountsDTO;
         }
-        return bankAccountsDTO;
     }
 
 }

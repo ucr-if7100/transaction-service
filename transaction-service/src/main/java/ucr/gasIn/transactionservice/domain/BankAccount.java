@@ -2,6 +2,8 @@ package ucr.gasIn.transactionservice.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "bank_account")
 public class BankAccount {
@@ -106,5 +108,17 @@ public class BankAccount {
 
     public void setId_user(int id_user) {
         this.id_user = id_user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankAccount that = (BankAccount) o;
+        return Objects.equals(accountNumber, that.accountNumber);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountNumber);
     }
 }
