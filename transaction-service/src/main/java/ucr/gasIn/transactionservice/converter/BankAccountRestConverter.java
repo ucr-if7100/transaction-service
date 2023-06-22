@@ -7,13 +7,13 @@ import ucr.gasIn.transactionservice.dto.BankAccountDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BankAccountRestConverter {
 
     public BankAccount postRequest(BankAccountDTO bankAccountDTO){
         BankAccount bankAccount = new BankAccount();
-        bankAccount.setAccountNumber(bankAccountDTO.getAccountNumber());
         bankAccount.setAccountName(bankAccountDTO.getAccountName());
         bankAccount.setBankAccountType(bankAccountDTO.getBankAccountType());
         bankAccount.setBankName(bankAccountDTO.getBankName());
@@ -22,6 +22,7 @@ public class BankAccountRestConverter {
         bankAccount.setCurrentBalance(bankAccountDTO.getCurrentBalance());
         bankAccount.setPhoneNumber(bankAccountDTO.getPhoneNumber());
         bankAccount.setId_user(bankAccountDTO.getId_user());
+        bankAccount.setActive(true);
 
         return bankAccount;
 
@@ -46,6 +47,16 @@ public class BankAccountRestConverter {
         }else{
             return bankAccountsDTO;
         }
+    }
+
+    public boolean validateUUID(String id){
+        try {
+            UUID uuid = UUID.fromString(id);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
     }
 
 }

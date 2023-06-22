@@ -3,9 +3,11 @@ package ucr.gasIn.transactionservice.dto;
 import ucr.gasIn.transactionservice.domain.BankAccount;
 import ucr.gasIn.transactionservice.domain.BankAccountType;
 
+import java.util.UUID;
+
 public class BankAccountDTO {
 
-    private int accountNumber;
+    private UUID id;
     private String accountName;
     private String bankName;
     private BankAccountType bankAccountType;
@@ -13,14 +15,14 @@ public class BankAccountDTO {
     private String card;
     private String iban;
     private String phoneNumber;
-    private int id_user;
+    private UUID id_user;
 
-    public int getAccountNumber() {
-        return accountNumber;
+    public UUID getId() {
+        return id;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getAccountName() {
@@ -79,11 +81,11 @@ public class BankAccountDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getId_user() {
+    public UUID getId_user() {
         return id_user;
     }
 
-    public void setId_user(int id_user) {
+    public void setId_user(UUID id_user) {
         this.id_user = id_user;
     }
 
@@ -92,7 +94,7 @@ public class BankAccountDTO {
 
 
     public static class builder{
-        private int accountNumber;
+        private UUID id;
         private String accountName;
         private String bankName;
         private BankAccountType bankAccountType;
@@ -100,7 +102,7 @@ public class BankAccountDTO {
         private String card;
         private String iban;
         private String phoneNumber;
-        private int id_user;
+        private UUID id_user;
         private BankAccount bankAccount;
 
         public builder(BankAccount bankAccount){
@@ -109,7 +111,7 @@ public class BankAccountDTO {
 
         public builder getAccountNumberResponse(){
             this.accountName=bankAccount.getAccountName();
-            this.accountNumber=bankAccount.getAccountNumber();
+            this.id=bankAccount.getId();
             this.bankName=bankAccount.getBankName();
             this.bankAccountType=bankAccount.getBankAccountType();
             this.currentBalance=bankAccount.getCurrentBalance();
@@ -120,7 +122,7 @@ public class BankAccountDTO {
         }
         public builder getUserIdResponse(){
             this.accountName=bankAccount.getAccountName();
-            this.accountNumber=bankAccount.getAccountNumber();
+            this.id=bankAccount.getId();
             this.bankName=bankAccount.getBankName();
             this.bankAccountType=bankAccount.getBankAccountType();
             this.currentBalance=bankAccount.getCurrentBalance();
@@ -132,7 +134,7 @@ public class BankAccountDTO {
         public BankAccountDTO build(){
             BankAccountDTO bankAccountDTO = new BankAccountDTO();
             bankAccountDTO.setAccountName(accountName);
-            bankAccountDTO.setAccountNumber(accountNumber);
+            bankAccountDTO.setId(id);
             bankAccountDTO.setBankName(bankName);
             bankAccountDTO.setBankAccountType(bankAccountType);
             bankAccountDTO.setCurrentBalance(currentBalance);

@@ -8,8 +8,8 @@ databaseChangeLog:
             tableName: Bank_Account
             columns:
               - column:
-                  name: Account_number
-                  type: int
+                  name: id
+                  type: binary(16)
                   constraints:
                     primaryKey: true
               - column:
@@ -48,7 +48,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: id_user
-                  type: int
+                  name: Id_user
+                  type: binary(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Active
+                  type: bit
                   constraints:
                     nullable: false

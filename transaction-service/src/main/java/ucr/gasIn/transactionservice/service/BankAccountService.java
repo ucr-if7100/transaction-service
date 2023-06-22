@@ -10,6 +10,7 @@ import ucr.gasIn.transactionservice.repository.BankAccountRepository;
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -26,20 +27,33 @@ public class BankAccountService {
         return repository.save(bankAccount) != null;
     }
 
-    public Optional<BankAccount> find_by_id(int accountNumber) {
-        return repository.findById(accountNumber);
+    public Optional<BankAccount> find_by_id(String id) {
+        UUID uuid = UUID.fromString(id);
+        return repository.findById(uuid);
     }
 
-    public Optional<List<BankAccount>> find_by_user_id(int userId) {
-        return repository.findAllByUserId(userId);
+    public Optional<List<BankAccount>> find_by_user_id(String userId) {
+        UUID uuid = UUID.fromString(userId);
+        return repository.findAllByUserId(uuid);
     }
 
     public void update(BankAccount entity) {
-        BankAccount entityToUpdate = repository.findById(entity.getAccountNumber()).get();
+        BankAccount entityToUpdate = repository.findById(entity.getId()).get();
         if(entityToUpdate != null) {
             repository.save(entity);
         }
     }
-    public void delete(int id) {repository.deleteById(id);
+    public boolean delete(String id) {
+        UUID uuid = UUID.fromString(id);
+        Optional<BankAccount> bankAccount = repository.findById(uuid);
+        if(bankAccount.isPresent()){
+            if(repository.deleteBankAccountById(uuid,false) > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }

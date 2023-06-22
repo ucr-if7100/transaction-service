@@ -1,17 +1,14 @@
 package ucr.gasIn.transactionservice.controller;
 
-import liquibase.resource.ResourceAccessor;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 import ucr.gasIn.transactionservice.converter.BankAccountRestConverter;
 import ucr.gasIn.transactionservice.dto.BankAccountDTO;
 import ucr.gasIn.transactionservice.service.BankAccountService;
-
-import java.net.http.HttpResponse;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/bank_account")
@@ -27,9 +24,9 @@ public class BankAccountController {
         return bankAccountService.save(converter.postRequest(bankAccount));
     }
 
-    @GetMapping(path = "/accountNumber/{accountNumber}")
-    public ResponseEntity<BankAccountDTO> getBankAccount(@PathVariable int accountNumber){
-        BankAccountDTO bankAccountDTO = converter.getAccountNumberResponse(bankAccountService.find_by_id(accountNumber));
+    @GetMapping(path = "/accountNumber/{id}")
+    public ResponseEntity<BankAccountDTO> getBankAccount(@PathVariable String id){
+        BankAccountDTO bankAccountDTO = converter.getAccountNumberResponse(bankAccountService.find_by_id(id));
         if(bankAccountDTO != null)
             return ResponseEntity.ok(bankAccountDTO);
         else
@@ -37,7 +34,7 @@ public class BankAccountController {
     }
 
     @GetMapping(path = "/user/{userId}")
-    public ResponseEntity<List<BankAccountDTO>> getUserBankAccounts(@PathVariable int userId){
+    public ResponseEntity<List<BankAccountDTO>> getUserBankAccounts(@PathVariable String userId){
         List<BankAccountDTO> bankAccountsDTO = converter.getUserResponse(bankAccountService.find_by_user_id(userId));
         if(!bankAccountsDTO.isEmpty())
             return ResponseEntity.ok(bankAccountsDTO);
@@ -48,5 +45,19 @@ public class BankAccountController {
     public void updateBankAccount
             (@RequestBody BankAccountDTO bankAccount) {
          bankAccountService.update(converter.postRequest(bankAccount));
+    }
+
+    @DeleteMapping (path = "/delete/{id}")
+    public ResponseEntity<Void> deleteBankAccount (@PathVariable String id) {
+        if(converter.validateUUID(id)){
+            if(bankAccountService.delete(id) == true){
+                return ResponseEntity.status(HttpStatus.OK).build();
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+        }
+
     }
 }

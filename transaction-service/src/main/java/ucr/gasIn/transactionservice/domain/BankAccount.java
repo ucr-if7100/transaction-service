@@ -1,16 +1,19 @@
 package ucr.gasIn.transactionservice.domain;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "bank_account")
 public class BankAccount {
     @Id
-    @Column(name = "Account_number", unique = true, nullable = false)
-    private int accountNumber;
-
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "Id", columnDefinition = "BINARY(16)")
+    private UUID id;
     @Column(name = "Account_Name", unique = false, length = 100, nullable = false)
     private String accountName;
 
@@ -32,18 +35,21 @@ public class BankAccount {
     @Column(name = "Phone_number", unique = false, length = 8, nullable = false)
     private String phoneNumber;
 
-    @Column(name = "id_user")
-    private int id_user;
+    @Column(name = "Id_user", columnDefinition = "BINARY(16)")
+    private UUID id_user;
+
+    @Column(name = "Active", columnDefinition = "BIT")
+    private Boolean active;
 
     public BankAccount() {
     }
 
-    public int getAccountNumber() {
-        return accountNumber;
+    public UUID getId() {
+        return id;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getAccountName() {
@@ -102,12 +108,20 @@ public class BankAccount {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getId_user() {
+    public UUID getId_user() {
         return id_user;
     }
 
-    public void setId_user(int id_user) {
+    public void setId_user(UUID id_user) {
         this.id_user = id_user;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override
@@ -115,10 +129,10 @@ public class BankAccount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BankAccount that = (BankAccount) o;
-        return Objects.equals(accountNumber, that.accountNumber);
+        return Objects.equals(id, that.id);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber);
+        return Objects.hash(id);
     }
 }
