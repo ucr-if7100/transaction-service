@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ucr.gasIn.transactionservice.domain.Transaction;
+import ucr.gasIn.transactionservice.domain.TransactionType;
 import ucr.gasIn.transactionservice.dto.TransactionDTO;
 import ucr.gasIn.transactionservice.repository.TransactionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,12 +37,49 @@ public class TransactionService {
 
     public void update(TransactionDTO transactionDTO) {
         Transaction transaction = convertDtoToEntity(transactionDTO);
-        Transaction entityToUpdate = repository.findById(transaction.getId()).get();
-        if(entityToUpdate != null) {
+        Transaction entityToUpdate = repository.findById(transaction.getId()).orElse(null);
+        if (entityToUpdate != null) {
             repository.save(transaction);
+        } else {
+            System.out.println("No se encontro el usuario");
         }
     }
     public void delete(UUID id) {repository.deleteById(id);
+    }
+
+
+    public List<TransactionDTO> getIncomeByIdUser(UUID idUser) {
+         List<TransactionDTO> allTransactions = listAll();
+        List<TransactionDTO> filteredTransactions = new ArrayList<>();
+        for (TransactionDTO transaction : allTransactions) {
+            if (transaction.getIdUser().equals(idUser) && transaction.getType() == TransactionType.INCOME) {
+                filteredTransactions.add(transaction);
+            }
+        }
+
+        return filteredTransactions;
+    }
+
+    public List<TransactionDTO> getExpenseByIdUser(UUID idUser) {
+        List<TransactionDTO> allTransactions = listAll();
+        List<TransactionDTO> filteredTransactions = new ArrayList<>();
+        for (TransactionDTO transaction : allTransactions) {
+            if (transaction.getIdUser().equals(idUser) && transaction.getType() == TransactionType.EXPENSE) {
+                filteredTransactions.add(transaction);
+            }
+        }
+        return filteredTransactions;
+    }
+
+    public List<TransactionDTO> getMyTransactionsByIdUser(UUID idUser) {
+        List<TransactionDTO> allTransactions = listAll();
+        List<TransactionDTO> filteredTransactions = new ArrayList<>();
+        for (TransactionDTO transaction : allTransactions) {
+            if (transaction.getIdUser().equals(idUser)) {
+                filteredTransactions.add(transaction);
+            }
+        }
+        return filteredTransactions;
     }
 
     private TransactionDTO convertEntityToDto(Transaction transaction){
@@ -69,4 +109,7 @@ public class TransactionService {
         transaction.setIdAccount(transactionDTO.getIdAccount());
         return transaction;
     }
+
+
+
 }

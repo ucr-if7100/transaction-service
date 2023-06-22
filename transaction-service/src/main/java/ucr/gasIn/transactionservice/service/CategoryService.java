@@ -12,8 +12,6 @@ import java.util.List;
 @Service
 @Transactional
 public class CategoryService {
-
-
     @Autowired
 
     private CategoryRepository repository;

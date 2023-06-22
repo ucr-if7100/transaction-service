@@ -14,7 +14,7 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: id_user
-                  type: int
+                  type: binary(16)
               - column:
                   name: num_ref_bank
                   type: varchar(255)

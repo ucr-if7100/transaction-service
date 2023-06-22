@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class TransactionDTO {
     private UUID id;
-    private int idUser;
+    private UUID idUser;
     private String numRefBank; //numero de referencia bancaria
     private int idAccount;
     private String description;
@@ -24,11 +24,11 @@ public class TransactionDTO {
         this.id = id;
     }
 
-    public int getIdUser() {
+    public UUID getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(UUID idUser) {
         this.idUser = idUser;
     }
 
