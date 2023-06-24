@@ -21,7 +21,10 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, UUID> 
     int deleteBankAccountById(UUID id,Boolean bool);
     @Modifying
     @Query("UPDATE BankAccount b SET b.accountName = :accountName, b.phoneNumber = :phone_number, b.card = :card  WHERE b.id = :id")
-    int updateBankAccount(UUID id, String accountName, String phone_number, String card);
+    int updateCreditDebitAccount(UUID id, String accountName, String phone_number, String card);
+    @Modifying
+    @Query("UPDATE BankAccount b SET b.accountName = :accountName WHERE b.id = :id")
+    int updateCashBankAccount(UUID id, String accountName);
 
 
 }

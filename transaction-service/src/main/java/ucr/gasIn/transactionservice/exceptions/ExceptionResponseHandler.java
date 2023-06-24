@@ -36,4 +36,14 @@ public class ExceptionResponseHandler {
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAccountNotFoundException(AccountNotFoundException ex) {
+
+        ErrorResponse response = new ErrorResponse(
+                ex.getMessage(),
+                ErrorCodes.NOT_FOUND
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
 }

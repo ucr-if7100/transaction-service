@@ -21,7 +21,7 @@ databaseChangeLog:
                   name: Bank_name
                   type: varchar(100)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: Bank_account_type
                   type: varchar(10)
@@ -36,17 +36,17 @@ databaseChangeLog:
                   name: Card
                   type: varchar(4)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: IBAN
                   type: varchar(100)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: Phone_number
                   type: varchar(8)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: Id_user
                   type: binary(16)

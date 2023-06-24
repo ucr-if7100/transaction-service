@@ -3,6 +3,7 @@ package ucr.gasIn.transactionservice.handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ucr.gasIn.transactionservice.domain.BankAccount;
+import ucr.gasIn.transactionservice.exceptions.AccountNotFoundException;
 import ucr.gasIn.transactionservice.exceptions.BDTransactionErrorException;
 import ucr.gasIn.transactionservice.exceptions.BusinessException;
 import ucr.gasIn.transactionservice.exceptions.InvalidInputException;
@@ -36,7 +37,7 @@ public class DeleteBankAccountHandler {
 
     private void validateExistingBankAccount(UUID id){
         if(!repository.findById(id).isPresent()){
-            throw new BusinessException("Account doesnt exists");
+            throw new AccountNotFoundException("Account doesnt exists");
         }
     }
 

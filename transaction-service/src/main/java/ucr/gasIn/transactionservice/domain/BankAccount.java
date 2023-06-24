@@ -17,7 +17,7 @@ public class BankAccount {
     @Column(name = "Account_Name", unique = false, length = 100, nullable = false)
     private String accountName;
 
-    @Column(name = "Bank_name", unique = false, length = 100, nullable = false)
+    @Column(name = "Bank_name", unique = false, length = 100, nullable = true)
     private String bankName;
 
     @Enumerated(EnumType.STRING)
@@ -27,12 +27,12 @@ public class BankAccount {
     @Column(name = "Current_balance", unique = false, nullable = false)
     private Float currentBalance;
 
-    @Column(name = "Card", unique = false, length = 4, nullable = false)
+    @Column(name = "Card", unique = false, length = 4, nullable = true)
     private String card;
 
-    @Column(name = "IBAN", unique = false, length = 100, nullable = false)
+    @Column(name = "IBAN", unique = false, length = 100, nullable = true)
     private String iban;
-    @Column(name = "Phone_number", unique = false, length = 8, nullable = false)
+    @Column(name = "Phone_number", unique = false, length = 8, nullable = true)
     private String phoneNumber;
 
     @Column(name = "Id_user", columnDefinition = "BINARY(16)")
