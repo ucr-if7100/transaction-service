@@ -13,8 +13,8 @@ public class KafkaTransaction {
     private String reference;
     private String description;
     private String category;
+    private String bank;
     private TransactionType transactionType;
-    private Bank bank;
     private AccountId accountId;
 
     public KafkaTransaction() {
@@ -84,11 +84,11 @@ public class KafkaTransaction {
         this.transactionType = transactionType;
     }
 
-    public Bank getBank() {
+    public String getBank() {
         return bank;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(String bank) {
         this.bank = bank;
     }
 
@@ -110,8 +110,8 @@ public class KafkaTransaction {
                 ", reference='" + reference + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
+                ", bank=" + bank + '\'' +
                 ", transactionType=" + transactionType +
-                ", bank=" + bank +
                 ", accountId=" + accountId +
                 '}';
     }

@@ -12,7 +12,7 @@ public class KafkaTransactionService {
 
     private static final Logger logger = LoggerFactory.getLogger(KafkaTransactionService.class);
 
-    @KafkaListener(topics="transactionCreated", containerFactory = "kafkaListenerContainerFactory", groupId = "com.example")
+    @KafkaListener(topics="transactionCreated", containerFactory = "kafkaListenerContainerFactory", groupId = "ucr.gasIn")
     public void consumer(Event<?> event){
         if(event.getClass().isAssignableFrom(TransactionCreatedEvent.class)){
             TransactionCreatedEvent transactionCreatedEvent = (TransactionCreatedEvent) event;
