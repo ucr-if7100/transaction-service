@@ -54,7 +54,7 @@ public class BankAccountController {
     }
     @PutMapping (path = "/update_status/{id}")
     public ResponseEntity<Void> updateBankAccountStatus (@PathVariable String id, @RequestBody UpdateBankAccountStatusDTO updateBankAccountStatusDTO){
-        deleteHandler.update(new UpdateBankAccountStatusHandler.Command(id,updateBankAccountStatusDTO.getStatus()));
+        deleteHandler.update(new UpdateBankAccountStatusHandler.Command(id,updateBankAccountStatusDTO.getActive()));
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }

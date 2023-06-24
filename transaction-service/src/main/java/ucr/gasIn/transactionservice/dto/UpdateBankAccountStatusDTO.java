@@ -1,16 +1,16 @@
 package ucr.gasIn.transactionservice.dto;
 
 public class UpdateBankAccountStatusDTO {
-    private boolean status;
+    private boolean active;
 
     public UpdateBankAccountStatusDTO() {
     }
 
-    public boolean getStatus() {
-        return status;
+    public boolean getActive() {
+        return active;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
