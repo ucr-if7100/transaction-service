@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ucr.gasIn.transactionservice.converter.BankAccountRestConverter;
 import ucr.gasIn.transactionservice.dto.BankAccountDTO;
 import ucr.gasIn.transactionservice.dto.UpdateBankAccountDTO;
-import ucr.gasIn.transactionservice.handler.DeleteBankAccountHandler;
+import ucr.gasIn.transactionservice.dto.UpdateBankAccountStatusDTO;
+import ucr.gasIn.transactionservice.handler.UpdateBankAccountStatusHandler;
 import ucr.gasIn.transactionservice.handler.UpdateBankAccountHandler;
 import ucr.gasIn.transactionservice.service.BankAccountService;
 import java.util.List;
@@ -26,7 +27,7 @@ public class BankAccountController {
     UpdateBankAccountHandler updateHandler;
 
     @Autowired
-    DeleteBankAccountHandler deleteHandler;
+    UpdateBankAccountStatusHandler deleteHandler;
 
     @PostMapping(path = "/save")
     public boolean saveBankAccount
@@ -51,9 +52,9 @@ public class BankAccountController {
         else
             return ResponseEntity.notFound().build();
     }
-    @DeleteMapping (path = "/delete/{id}")
-    public ResponseEntity<Void> deleteBankAccount (@PathVariable String id) {
-        deleteHandler.delete(new DeleteBankAccountHandler.Command(id));
+    @PutMapping (path = "/update_status/{id}")
+    public ResponseEntity<Void> updateBankAccountStatus (@PathVariable String id, @RequestBody UpdateBankAccountStatusDTO updateBankAccountStatusDTO){
+        deleteHandler.update(new UpdateBankAccountStatusHandler.Command(id,updateBankAccountStatusDTO.getStatus()));
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
