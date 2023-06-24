@@ -6,17 +6,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ucr.gasIn.transactionservice.converter.BankAccountRestConverter;
 import ucr.gasIn.transactionservice.dto.BankAccountDTO;
+import ucr.gasIn.transactionservice.dto.UpdateBankAccountDTO;
+import ucr.gasIn.transactionservice.handler.DeleteBankAccountHandler;
+import ucr.gasIn.transactionservice.handler.UpdateBankAccountHandler;
 import ucr.gasIn.transactionservice.service.BankAccountService;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/bank_account")
+@CrossOrigin(origins = "http://localhost:4200/*")
 public class BankAccountController {
     @Autowired
     BankAccountService bankAccountService;
     @Autowired
     BankAccountRestConverter converter;
+
+    @Autowired
+    UpdateBankAccountHandler updateHandler;
+
+    @Autowired
+    DeleteBankAccountHandler deleteHandler;
 
     @PostMapping(path = "/save")
     public boolean saveBankAccount
@@ -41,23 +51,20 @@ public class BankAccountController {
         else
             return ResponseEntity.notFound().build();
     }
-    @PostMapping(path = "/update")
-    public void updateBankAccount
-            (@RequestBody BankAccountDTO bankAccount) {
-         bankAccountService.update(converter.postRequest(bankAccount));
-    }
-
     @DeleteMapping (path = "/delete/{id}")
     public ResponseEntity<Void> deleteBankAccount (@PathVariable String id) {
-        if(converter.validateUUID(id)){
-            if(bankAccountService.delete(id) == true){
-                return ResponseEntity.status(HttpStatus.OK).build();
-            }else{
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-        }
+        deleteHandler.delete(new DeleteBankAccountHandler.Command(id));
+        return ResponseEntity.status(HttpStatus.OK).build();
 
     }
+    @PutMapping (path = "/update/{id}")
+    public ResponseEntity<Void> updateBankAccount (@PathVariable String id, @RequestBody UpdateBankAccountDTO bankAccountDTO ) {
+        updateHandler.update(new UpdateBankAccountHandler.Command(id,
+                bankAccountDTO.getAccountName(),
+                bankAccountDTO.getPhoneNumber(),
+                bankAccountDTO.getCard()));
+        return ResponseEntity.status(HttpStatus.OK).build();
+
+    }
+
 }

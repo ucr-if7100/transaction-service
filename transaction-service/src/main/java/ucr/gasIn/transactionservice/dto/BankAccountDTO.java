@@ -118,6 +118,7 @@ public class BankAccountDTO {
             this.card=bankAccount.getCard();
             this.iban=bankAccount.getIban();
             this.id_user=bankAccount.getId_user();
+            this.phoneNumber=bankAccount.getPhoneNumber();
             return this;
         }
         public builder getUserIdResponse(){
@@ -128,6 +129,7 @@ public class BankAccountDTO {
             this.currentBalance=bankAccount.getCurrentBalance();
             this.card=bankAccount.getCard();
             this.iban=bankAccount.getIban();
+            this.phoneNumber=bankAccount.getPhoneNumber();
             return this;
         }
 
