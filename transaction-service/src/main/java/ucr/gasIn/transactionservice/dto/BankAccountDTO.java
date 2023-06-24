@@ -16,6 +16,7 @@ public class BankAccountDTO {
     private String iban;
     private String phoneNumber;
     private UUID id_user;
+    private boolean active;
 
     public UUID getId() {
         return id;
@@ -89,6 +90,13 @@ public class BankAccountDTO {
         this.id_user = id_user;
     }
 
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     private BankAccountDTO(){
     }
 
@@ -103,6 +111,7 @@ public class BankAccountDTO {
         private String iban;
         private String phoneNumber;
         private UUID id_user;
+        private boolean active;
         private BankAccount bankAccount;
 
         public builder(BankAccount bankAccount){
@@ -119,6 +128,7 @@ public class BankAccountDTO {
             this.iban=bankAccount.getIban();
             this.id_user=bankAccount.getId_user();
             this.phoneNumber=bankAccount.getPhoneNumber();
+            this.active=bankAccount.getActive();
             return this;
         }
         public builder getUserIdResponse(){
@@ -130,6 +140,7 @@ public class BankAccountDTO {
             this.card=bankAccount.getCard();
             this.iban=bankAccount.getIban();
             this.phoneNumber=bankAccount.getPhoneNumber();
+            this.active=bankAccount.getActive();
             return this;
         }
 
@@ -144,6 +155,7 @@ public class BankAccountDTO {
             bankAccountDTO.setIban(iban);
             bankAccountDTO.setPhoneNumber(phoneNumber);
             bankAccountDTO.setId_user(id_user);
+            bankAccountDTO.setActive(active);
             return bankAccountDTO;
         }
 
