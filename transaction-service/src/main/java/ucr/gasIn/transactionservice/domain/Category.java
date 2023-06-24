@@ -1,6 +1,6 @@
 package ucr.gasIn.transactionservice.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 public class Category {
