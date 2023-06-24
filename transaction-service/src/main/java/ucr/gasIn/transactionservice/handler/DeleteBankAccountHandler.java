@@ -2,6 +2,7 @@ package ucr.gasIn.transactionservice.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ucr.gasIn.transactionservice.domain.BankAccount;
 import ucr.gasIn.transactionservice.exceptions.AccountNotFoundException;
 import ucr.gasIn.transactionservice.exceptions.BDTransactionErrorException;
@@ -12,6 +13,7 @@ import ucr.gasIn.transactionservice.repository.BankAccountRepository;
 import java.util.UUID;
 
 @Component
+@Transactional
 public class DeleteBankAccountHandler {
     @Autowired
     private BankAccountRepository repository;
@@ -42,7 +44,7 @@ public class DeleteBankAccountHandler {
     }
 
     private void validateDelete(UUID uuid){
-        if(repository.deleteBankAccountById(uuid,false) == 0){
+        if(repository.deleteBankAccountById(uuid) == 0){
             throw new BDTransactionErrorException("Error deleting account");
         }
     }

@@ -17,8 +17,8 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, UUID> 
     @Query("SELECT b FROM BankAccount b WHERE b.id_user = :userId")
     Optional<List<BankAccount>> findAllByUserId(@Param("userId") UUID userId);
     @Modifying
-    @Query("UPDATE BankAccount b SET b.active = :bool WHERE b.id = :id")
-    int deleteBankAccountById(UUID id,Boolean bool);
+    @Query("UPDATE BankAccount b SET b.active = false WHERE b.id = :id")
+    int deleteBankAccountById(@Param("id") UUID id);
     @Modifying
     @Query("UPDATE BankAccount b SET b.accountName = :accountName, b.phoneNumber = :phone_number, b.card = :card  WHERE b.id = :id")
     int updateCreditDebitAccount(UUID id, String accountName, String phone_number, String card);

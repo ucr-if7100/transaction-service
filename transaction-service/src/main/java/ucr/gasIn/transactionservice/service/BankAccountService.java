@@ -47,7 +47,7 @@ public class BankAccountService {
         UUID uuid = UUID.fromString(id);
         Optional<BankAccount> bankAccount = repository.findById(uuid);
         if(bankAccount.isPresent()){
-            if(repository.deleteBankAccountById(uuid,false) > 0){
+            if(repository.deleteBankAccountById(uuid) > 0){
                 return true;
             }else{
                 return false;
