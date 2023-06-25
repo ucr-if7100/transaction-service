@@ -8,6 +8,7 @@ import ucr.gasIn.transactionservice.converter.BankAccountRestConverter;
 import ucr.gasIn.transactionservice.dto.BankAccountDTO;
 import ucr.gasIn.transactionservice.dto.UpdateBankAccountDTO;
 import ucr.gasIn.transactionservice.dto.UpdateBankAccountStatusDTO;
+import ucr.gasIn.transactionservice.handler.GetBankAccountHandler;
 import ucr.gasIn.transactionservice.handler.UpdateBankAccountStatusHandler;
 import ucr.gasIn.transactionservice.handler.UpdateBankAccountHandler;
 import ucr.gasIn.transactionservice.service.BankAccountService;
@@ -28,7 +29,8 @@ public class BankAccountController {
 
     @Autowired
     UpdateBankAccountStatusHandler deleteHandler;
-
+    @Autowired
+    GetBankAccountHandler getbankHandler;
     @PostMapping(path = "/save")
     public boolean saveBankAccount
             (@RequestBody BankAccountDTO bankAccount) {
@@ -46,7 +48,7 @@ public class BankAccountController {
 
     @GetMapping(path = "/user/{userId}")
     public ResponseEntity<List<BankAccountDTO>> getUserBankAccounts(@PathVariable String userId){
-        List<BankAccountDTO> bankAccountsDTO = converter.getUserResponse(bankAccountService.find_by_user_id(userId));
+        List<BankAccountDTO> bankAccountsDTO = converter.getUserResponse(getbankHandler.get(new GetBankAccountHandler.Command(userId)));
         if(!bankAccountsDTO.isEmpty())
             return ResponseEntity.ok(bankAccountsDTO);
         else
