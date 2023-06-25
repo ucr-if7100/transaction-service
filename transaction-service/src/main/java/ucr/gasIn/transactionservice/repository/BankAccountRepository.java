@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount, UUID> {
-    @Query("SELECT b FROM BankAccount b WHERE b.id_user = :userId")
+    @Query("SELECT b FROM BankAccount b WHERE b.id_user = :userId AND b.active = true ")
     Optional<List<BankAccount>> findAllByUserId(@Param("userId") UUID userId);
     @Modifying
     @Query("UPDATE BankAccount b SET b.active = :bool WHERE b.id = :id")
@@ -25,6 +25,7 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, UUID> 
     @Modifying
     @Query("UPDATE BankAccount b SET b.accountName = :accountName WHERE b.id = :id")
     int updateCashBankAccount(UUID id, String accountName);
-
+    @Query("SELECT b FROM BankAccount b WHERE b.id = :Id AND b.active = true")
+    Optional<BankAccount> findById(@Param("Id") UUID Id);
 
 }
