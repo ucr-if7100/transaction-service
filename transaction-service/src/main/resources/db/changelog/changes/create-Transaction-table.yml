@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_Transaction_Table
+      author: Maikel Sánchez ROjas
+      changes:
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: id
+                  type: binary(16)
+                  #autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: id_user
+                  type: binary(16)
+              - column:
+                  name: num_ref_bank
+                  type: varchar(255)
+              - column:
+                  name: id_account
+                  type: int
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: type
+                  type: varchar(10)
+              - column:
+                  name: amount
+                  type: float
+              - column:
+                  name: date
+                  type: varchar(255)
+              - column:
+                  name: id_category
+                  type: int
+                  constraints:
+                    nullable: true
+        ##- addForeignKeyConstraint:
+       ##     baseTableName: transaction
+         #   baseColumnNames: category_id
+          ##  referencedTableName: category
+            #referencedColumnNames: id
+            #constraintName: FK_Transaction_Category
