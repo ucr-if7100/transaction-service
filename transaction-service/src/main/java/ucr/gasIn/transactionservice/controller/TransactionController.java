@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(path = "/api/Transaction")
+@RequestMapping(path = "/Transaction")
 public class TransactionController {
     @Autowired
     private TransactionService service;

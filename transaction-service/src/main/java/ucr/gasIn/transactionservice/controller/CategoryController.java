@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(path = "/api/Category")
+@RequestMapping(path = "/Category")
 public class CategoryController {
 
     @Autowired
