@@ -13,9 +13,11 @@ public class KafkaTransaction {
     private String reference;
     private String description;
     private String category;
-    private String bank;
+    private String bankName;
     private TransactionType transactionType;
     private AccountId accountId;
+
+    private boolean readStatus;
 
     public KafkaTransaction() {
     }
@@ -84,12 +86,12 @@ public class KafkaTransaction {
         this.transactionType = transactionType;
     }
 
-    public String getBank() {
-        return bank;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setBank(String bank) {
-        this.bank = bank;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public AccountId getAccountId() {
@@ -98,6 +100,14 @@ public class KafkaTransaction {
 
     public void setAccountId(AccountId accountId) {
         this.accountId = accountId;
+    }
+
+    public boolean isReadStatus() {
+        return readStatus;
+    }
+
+    public void setReadStatus(boolean readStatus) {
+        this.readStatus = readStatus;
     }
 
     @Override
@@ -110,9 +120,10 @@ public class KafkaTransaction {
                 ", reference='" + reference + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
-                ", bank=" + bank + '\'' +
+                ", bankName='" + bankName + '\'' +
                 ", transactionType=" + transactionType +
                 ", accountId=" + accountId +
+                ", readStatus=" + readStatus +
                 '}';
     }
 }
