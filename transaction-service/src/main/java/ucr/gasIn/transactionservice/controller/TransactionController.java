@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ucr.gasIn.transactionservice.domain.Category;
-import ucr.gasIn.transactionservice.domain.Transaction;
 import ucr.gasIn.transactionservice.dto.TransactionDTO;
 import ucr.gasIn.transactionservice.service.TransactionService;
 
@@ -19,6 +17,7 @@ import java.util.UUID;
 public class TransactionController {
     @Autowired
     private TransactionService service;
+
     @GetMapping("/get")
     public List<TransactionDTO> list() {
         return service.listAll();
@@ -35,6 +34,23 @@ public class TransactionController {
         }
     }
 
+    @GetMapping("/getIncome/{id}")
+    public List<TransactionDTO> getIncome(@PathVariable("id") String id) {
+        UUID idUser = UUID.fromString(id);
+        return service.getIncomeByIdUser(idUser);
+    }
+
+    @GetMapping("/getExpense/{id}")
+    public List<TransactionDTO> getExpense(@PathVariable("id") String id) {
+        UUID idUser = UUID.fromString(id);
+        return service.getExpenseByIdUser(idUser);
+    }
+
+    @GetMapping("/getMyTransactions/{id}")
+    public List<TransactionDTO> getMyTransactions(@PathVariable("id") String id) {
+        UUID idUser = UUID.fromString(id);
+        return service.getMyTransactionsByIdUser(idUser);
+    }
 
     @PostMapping("/insert")
     public void add(@RequestBody TransactionDTO transactionDTO) {service.save(transactionDTO);
