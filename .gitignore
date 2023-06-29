@@ -46,6 +46,10 @@ logs/
 *.war
 *.ear
 
+hs_err_pid*
+replay_pid*
+transaction-service/src/main/resources/.env
+
 # Other
 target/
 .classpath
