@@ -1,6 +1,6 @@
 package ucr.gasIn.transactionservice.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
