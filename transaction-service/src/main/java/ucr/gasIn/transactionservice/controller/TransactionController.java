@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ucr.gasIn.transactionservice.domain.Category;
-import ucr.gasIn.transactionservice.domain.Transaction;
+import ucr.gasIn.transactionservice.dto.TransactionDTO;
 import ucr.gasIn.transactionservice.service.TransactionService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -17,35 +17,57 @@ import java.util.NoSuchElementException;
 public class TransactionController {
     @Autowired
     private TransactionService service;
+
     @GetMapping("/get")
-    public List<Transaction> list() {
+    public List<TransactionDTO> list() {
         return service.listAll();
     }
 
     @GetMapping("/getId/{id}")
-    public ResponseEntity<Transaction> get(@PathVariable Integer id) {
+    public ResponseEntity<TransactionDTO> get(@PathVariable("id") String id) {
         try {
-            Transaction transaction = service.get(id);
-            return new ResponseEntity<Transaction>(transaction, HttpStatus.OK);
+            UUID idTransaction = UUID.fromString(id);
+            TransactionDTO transaction = service.get(idTransaction);
+            return new ResponseEntity<TransactionDTO>(transaction, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<Transaction>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<TransactionDTO>(HttpStatus.NOT_FOUND);
         }
     }
 
+    @GetMapping("/getIncome/{id}")
+    public List<TransactionDTO> getIncome(@PathVariable("id") String id) {
+        UUID idUser = UUID.fromString(id);
+        return service.getIncomeByIdUser(idUser);
+    }
+
+    @GetMapping("/getExpense/{id}")
+    public List<TransactionDTO> getExpense(@PathVariable("id") String id) {
+        UUID idUser = UUID.fromString(id);
+        return service.getExpenseByIdUser(idUser);
+    }
+
+    @GetMapping("/getMyTransactions/{id}")
+    public List<TransactionDTO> getMyTransactions(@PathVariable("id") String id) {
+        UUID idUser = UUID.fromString(id);
+        return service.getMyTransactionsByIdUser(idUser);
+    }
+
     @PostMapping("/insert")
-    public void add(@RequestBody Transaction transaction) {service.save(transaction);
+    public void add(@RequestBody TransactionDTO transactionDTO) {service.save(transactionDTO);
     }
 
     @RequestMapping(path = "/update/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable("id") int id,
-                       @RequestBody Transaction transaction) {
-        Transaction entity = transaction;
-        entity.setId(id);
+    public void update(@PathVariable("id") String id,
+                       @RequestBody TransactionDTO transactionDTO) {
+        TransactionDTO entity = transactionDTO;
+        UUID idTransaction = UUID.fromString(id);
+        entity.setId(idTransaction);
         service.update(entity);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Integer id) {
-        service.delete(id);
+    public void delete(@PathVariable("id") String id) {
+        UUID idTransaction = UUID.fromString(id);
+        service.delete(idTransaction);
     }
 }

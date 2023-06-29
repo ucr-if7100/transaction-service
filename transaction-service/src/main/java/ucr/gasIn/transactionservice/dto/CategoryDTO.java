@@ -1,23 +1,15 @@
-package ucr.gasIn.transactionservice.domain;
+package ucr.gasIn.transactionservice.dto;
 
-import jakarta.persistence.*;
+public class CategoryDTO {
 
-@Entity
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
+
     private String description;
+
     private int id_user;
 
-    public Category(int id, String name, String description, int idUser) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.id_user = idUser;
-    }
-    public Category(){}
 
     public int getId() {
         return id;

@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @Configuration
 public class TransactionServiceApplication implements WebMvcConfigurer {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TransactionServiceApplication.class, args);
 	}
@@ -20,5 +19,4 @@ public class TransactionServiceApplication implements WebMvcConfigurer {
 				.allowedMethods("*")
 				.allowedHeaders("*");
 	}
-
 }

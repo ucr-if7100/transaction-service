@@ -8,25 +8,25 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
-                  autoIncrement: true
+                  type: binary(16)
+                  #autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
                   name: id_user
-                  type: int
+                  type: binary(16)
               - column:
-                  name: numRefBank
+                  name: num_ref_bank
                   type: varchar(255)
               - column:
-                  name: idAccount
+                  name: id_account
                   type: int
               - column:
                   name: description
                   type: varchar(255)
               - column:
                   name: type
-                  type: char
+                  type: varchar(10)
               - column:
                   name: amount
                   type: float
@@ -34,13 +34,13 @@ databaseChangeLog:
                   name: date
                   type: varchar(255)
               - column:
-                  name: category_id
+                  name: id_category
                   type: int
                   constraints:
                     nullable: true
-        - addForeignKeyConstraint:
-            baseTableName: transaction
-            baseColumnNames: category_id
-            referencedTableName: category
-            referencedColumnNames: id
-            constraintName: FK_Transaction_Category
+        ##- addForeignKeyConstraint:
+       ##     baseTableName: transaction
+         #   baseColumnNames: category_id
+          ##  referencedTableName: category
+            #referencedColumnNames: id
+            #constraintName: FK_Transaction_Category
